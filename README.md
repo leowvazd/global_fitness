@@ -1,4 +1,4 @@
-# global_fitness
+# Global_Fitness
 
 A new Flutter project.
 
