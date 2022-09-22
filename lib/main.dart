@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:global_fitness/screens/bmi_screen.dart';
 import 'package:global_fitness/screens/intro_screen.dart';
 
 void main() {
@@ -12,7 +13,14 @@ class GlobalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blueGrey),
-      home: const IntroScreen(),
+
+      routes: {
+        '/': (context) => const IntroScreen(),
+        '/bmi': (context) => const BmiScreen(),
+      },
+      initialRoute: '/',
+
+      // home: const IntroScreen(),
     );
   }
 }
