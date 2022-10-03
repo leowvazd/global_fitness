@@ -19,7 +19,6 @@ class GlobalApp extends StatelessWidget {
         '/bmi': (context) => const BmiScreen(),
       },
       initialRoute: '/',
-
       // home: const IntroScreen(),
     );
   }

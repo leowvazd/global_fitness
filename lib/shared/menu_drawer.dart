@@ -37,7 +37,7 @@ class MenuDrawer extends StatelessWidget {
       ),
     );
 
-    menuTitles.forEach((String element) {
+    for (var element in menuTitles) {
       Widget screen = Container();
 
       menuItems.add(ListTile(
@@ -61,7 +61,7 @@ class MenuDrawer extends StatelessWidget {
               .push(MaterialPageRoute(builder: (context) => screen));
         },
       ));
-    });
+    }
     return menuItems;
   }
 }

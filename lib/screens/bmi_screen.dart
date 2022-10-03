@@ -10,6 +10,8 @@ class BmiScreen extends StatefulWidget {
 }
 
 class _BmiScreenState extends State<BmiScreen> {
+  final TextEditingController txtHeight = TextEditingController();
+  final TextEditingController txtWeight = TextEditingController();
   final double fontSize = 18;
   String result = '';
   bool isMetric = true;
@@ -17,6 +19,8 @@ class _BmiScreenState extends State<BmiScreen> {
   double? height;
   double? weight;
   late List<bool> isSelected;
+  String weightMessage = '';
+  String heightMessage = '';
 
   @override
   void initState() {
@@ -26,38 +30,44 @@ class _BmiScreenState extends State<BmiScreen> {
 
   @override
   Widget build(BuildContext context) {
+    heightMessage =
+        'Please insert your height in ${(isMetric) ? 'meters' : 'inches'}';
+    weightMessage =
+        'Please insert your weight in ${(isMetric) ? 'kilos' : 'pounds'}';
+
     return Scaffold(
       appBar: AppBar(title: const Text('BMI Calculator')),
       bottomNavigationBar: const MenuBottom(),
       drawer: const MenuDrawer(),
       body: Column(children: [
-        ToggleButtons(
-            isSelected: isSelected,
-            onPressed: toggleMeasure,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: Text(
-                  'Metric',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: Text(
-                  'Imperial',
-                  style: TextStyle(
-                    fontSize: fontSize,
-                  ),
-                ),
-              ),
-            ]),
+        ToggleButtons(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text('Metric', style: TextStyle(fontSize: fontSize)),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text('Imperial', style: TextStyle(fontSize: fontSize)),
+          ),
+        ], isSelected: isSelected, onPressed: toggleMeasure),
+        TextField(
+          controller: txtHeight,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(hintText: heightMessage),
+        ),
+        TextField(
+          controller: txtWeight,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(hintText: weightMessage),
+        ),
+        ElevatedButton(
+          child: Text('Calculate BMI', style: TextStyle(fontSize: fontSize)),
+          onPressed: () {},
+        ),
+        Text(
+          result,
+          style: TextStyle(fontSize: fontSize),
+        )
       ]),
     );
   }
